@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -8,8 +9,21 @@ import { ReactComponent as PexelsIcon} from '../../Assets/pexels_icon.svg';
 import { ReactComponent as PexelsName} from '../../Assets/pexels_name.svg';
 
 const Header = () => {
+
+  const navigate = useNavigate();
+
+  const [inputValue, setInputValue] = useState('');
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  function onSearch(e) {
+    navigate('/movies/?search=' + inputValue)
+  }
+
   return (
-    <Navbar className="navbar-dark bg-dark" >
+    <Navbar style={{backgroundColor: '#000000'}} >
     <Container fluid>
         <Navbar.Brand href="#">
           <PexelsIcon/>
@@ -17,6 +31,7 @@ const Header = () => {
         <Navbar.Brand href="#">
           <PexelsName/>
         </Navbar.Brand>
+                
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -24,28 +39,35 @@ const Header = () => {
             navbarScroll
           >
           </Nav>
-          <Form className="d-flex">
+
+          <Form className="d-flex center" onSubmit={e => e.preventDefault()}>
             <Form.Control
               type="search"
               placeholder="Search"
               className="me-2"
               aria-label="Search"
+              value={inputValue}
+              onChange={handleInputChange} 
             />
+
             <Button 
-            type="submit"
-            className='btn-small btn-success'
+              type="submit"
+              className='btn-small btn-success'
+              onClick={()=>onSearch()}
             >
-              <i class="bi bi-search"></i>
+              <i className="bi bi-search"></i>
             </Button>
+
             <Button  
               type="submit"
               className='btn-small btn-success'
             >
-              <i class="bi bi-funnel-fill"></i>
+              <i className="bi bi-funnel-fill"></i>
             </Button>
           </Form>
+
         </Navbar.Collapse>
-      </Container>
+    </Container>
     </Navbar>
   );
 }

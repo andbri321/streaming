@@ -2,6 +2,7 @@
 
 class PexelsController < ApplicationController
   before_action :call_pexel, only: %i[index show]
+  skip_before_action :authenticate
 
   def index
     if @response[:data]

@@ -1,12 +1,15 @@
 import React from 'react';
 import Image from 'react-bootstrap/Image';
 
-const FeedCard = ({width}) => {
+const FeedCard = ({width, pexel, handleShow, key_value}) => {
   return (
     <Image
-      src='https://images.pexels.com/videos/854132/pictures/preview-0.jpg'
+      key={key_value}
+      src={pexel.video_pictures[0].picture}
       width={width}
       height="180px"
+      onClick={() => handleShow(pexel.id)}
+
       />
   );
 };

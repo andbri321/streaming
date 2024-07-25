@@ -3,24 +3,35 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import FeedCard from './FeedCard';
 
-const FeedGrid = () => {
+const FeedGrid = ({pexels,handleShow}) => {
+  function groupByThree([a,b,c,d,...rest]){
+    if (rest.length === 0) return [[a,b,c,d].filter(x => x!==undefined)]
+    return [[a,b,c,d]].concat(groupByThree(rest))
+  }
+
+  const pexels_by_row = pexels ? groupByThree(pexels) : null;
 
   return (
     <div>
-      {[...Array(4)].map((elementInArray, index) => ( 
-        <Row className='mt-3'>
-          <Col className='mr-2'>
-            <FeedCard width={'100%'}/>
-          </Col>
-          <Col className='mr-2'>
-            <FeedCard width={'100%'}/>
-          </Col>
-          <Col className='mr-2'>
-            <FeedCard width={'100%'}/>
-          </Col>
-          <Col className='mr-2'>
-            <FeedCard width={'100%'}/>
-          </Col>
+      {pexels_by_row && pexels_by_row.map((row, i) => ( 
+        <Row 
+          key={'row_'+i}
+          className='mt-3'>
+                      {
+              row.map((pexel,j) => (
+                <Col 
+                  key={'col_'+j}
+                  xs={3}
+                  className='mr-2'>
+                    <FeedCard
+                    width={'100%'}
+                    key={'feed_card_'+j}
+                    pexel={pexel}
+                    handleShow={handleShow}
+                    />
+                </Col>
+              ))
+            }
       </Row>
       ))}
     </div>

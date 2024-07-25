@@ -35,13 +35,13 @@ const Header = () => {
             type="submit"
             className='btn-small btn-success'
             >
-              <i class="bi bi-search"></i>
+              <i className="bi bi-search"></i>
             </Button>
             <Button  
               type="submit"
               className='btn-small btn-success'
             >
-              <i class="bi bi-funnel-fill"></i>
+              <i className="bi bi-funnel-fill"></i>
             </Button>
           </Form>
         </Navbar.Collapse>

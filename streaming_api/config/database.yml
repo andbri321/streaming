@@ -25,6 +25,7 @@ development:
   database: streaming_api_development
   username: postgres
   password: secret
+  port: 5432
 
 test:
   <<: *default
